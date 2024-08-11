@@ -1,3 +1,62 @@
-[gd_scene format=3 uid="uid://bqugm2p4bkh67"]
+[gd_scene load_steps=9 format=3 uid="uid://bqugm2p4bkh67"]
+
+[ext_resource type="PackedScene" uid="uid://b8jg7wwef5otj" path="res://scenes/player.tscn" id="1_shg2h"]
+[ext_resource type="PackedScene" uid="uid://8t4etv2pqlb1" path="res://scenes/player_cam.tscn" id="2_4dxdl"]
+[ext_resource type="Texture2D" uid="uid://co2ilpi73o2jm" path="res://icon.svg" id="3_q0kx6"]
+[ext_resource type="Texture2D" uid="uid://gvoebvyvs757" path="res://textures/walltext_test.png" id="4_577yf"]
+[ext_resource type="Texture2D" uid="uid://bxxtiokuckkc1" path="res://textures/objtext_test1.png" id="5_f1hvt"]
+[ext_resource type="Texture2D" uid="uid://dvduj2qmdgltf" path="res://textures/objtext_test2.png" id="6_l3cb1"]
+[ext_resource type="PackedScene" uid="uid://7xj0kx8w6q2o" path="res://scenes/hideable_object.tscn" id="7_bfp0i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_why6n"]
 
 [node name="MainGame" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_shg2h")]
+z_index = 1000
+
+[node name="CameraPivot" parent="Player" instance=ExtResource("2_4dxdl")]
+
+[node name="LevelPlaceholder" type="Node2D" parent="."]
+
+[node name="wall_paceholder" type="Sprite2D" parent="LevelPlaceholder"]
+z_index = -1
+position = Vector2(-1.54972e-05, -85)
+scale = Vector2(0.661591, 0.511848)
+texture = ExtResource("4_577yf")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="LevelPlaceholder"]
+position = Vector2(0, 30)
+scale = Vector2(38.275, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelPlaceholder/StaticBody2D"]
+shape = SubResource("RectangleShape2D_why6n")
+
+[node name="Sprite2D" type="Sprite2D" parent="LevelPlaceholder/StaticBody2D"]
+modulate = Color(0, 0, 0, 1)
+z_index = 4096
+scale = Vector2(0.16, 0.16)
+texture = ExtResource("3_q0kx6")
+
+[node name="obj1" type="Sprite2D" parent="LevelPlaceholder"]
+position = Vector2(64, 2)
+scale = Vector2(0.236434, 0.218563)
+texture = ExtResource("5_f1hvt")
+
+[node name="obj2" type="Sprite2D" parent="LevelPlaceholder"]
+position = Vector2(210.005, 2)
+scale = Vector2(0.236434, 0.218563)
+texture = ExtResource("5_f1hvt")
+
+[node name="obj3" type="Sprite2D" parent="LevelPlaceholder"]
+position = Vector2(36, 6.99999)
+scale = Vector2(0.174419, 0.158683)
+texture = ExtResource("6_l3cb1")
+
+[node name="obj4" type="Sprite2D" parent="LevelPlaceholder"]
+position = Vector2(-100, 7)
+scale = Vector2(0.174419, 0.158683)
+texture = ExtResource("6_l3cb1")
+
+[node name="HideableObject" parent="." instance=ExtResource("7_bfp0i")]
+position = Vector2(-253, 5)

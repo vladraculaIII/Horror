@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://b8jg7wwef5otj"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_c0tar"]
+[ext_resource type="Texture2D" uid="uid://xoinf2t72txh" path="res://textures/player_test.png" id="2_0sl5u"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c68iw"]
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+script = ExtResource("1_c0tar")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_c68iw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0.5, -0.999997)
+scale = Vector2(0.178295, 0.203593)
+texture = ExtResource("2_0sl5u")
+
+[node name="NoStaminaTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="timeout" from="NoStaminaTimer" to="." method="_on_no_stamina_timer_timeout"]
