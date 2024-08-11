@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqugm2p4bkh67"]
+
+[ext_resource type="PackedScene" uid="uid://c6101n2buob3d" path="res://scenes/Monster.tscn" id="1_ubip8"]
+
+[node name="MainGame" type="Node2D"]
+
+[node name="Node2D" parent="." instance=ExtResource("1_ubip8")]
+position = Vector2(30, 30)
+scale = Vector2(3, 3)

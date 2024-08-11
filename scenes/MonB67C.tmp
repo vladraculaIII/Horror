@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://c6101n2buob3d"]
+
+[ext_resource type="Script" path="res://scripts/MonsterMovement.gd" id="1_c87yh"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_6vim8"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_o1q8g"]
+friction = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_30cs8"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_c87yh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1.43051e-06, 0)
+scale = Vector2(20, 20)
+texture = SubResource("PlaceholderTexture2D_6vim8")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+disable_mode = 2
+mass = 0.1
+physics_material_override = SubResource("PhysicsMaterial_o1q8g")
+gravity_scale = 0.0
+can_sleep = false
+lock_rotation = true
+linear_velocity = Vector2(5, 5)
+constant_force = Vector2(3, 3)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource("RectangleShape2D_30cs8")

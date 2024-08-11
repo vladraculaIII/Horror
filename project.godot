@@ -13,6 +13,7 @@ config_version=5
 config/name="HorrSurv"
 run/main_scene="res://scenes/main_game.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
+run/max_fps=240
 config/icon="res://icon.svg"
 
 [input]

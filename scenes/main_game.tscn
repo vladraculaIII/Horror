@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bqugm2p4bkh67"]
+[gd_scene load_steps=10 format=3 uid="uid://bqugm2p4bkh67"]
 
 [ext_resource type="PackedScene" uid="uid://b8jg7wwef5otj" path="res://scenes/player.tscn" id="1_shg2h"]
 [ext_resource type="PackedScene" uid="uid://8t4etv2pqlb1" path="res://scenes/player_cam.tscn" id="2_4dxdl"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bxxtiokuckkc1" path="res://textures/objtext_test1.png" id="5_f1hvt"]
 [ext_resource type="Texture2D" uid="uid://dvduj2qmdgltf" path="res://textures/objtext_test2.png" id="6_l3cb1"]
 [ext_resource type="PackedScene" uid="uid://7xj0kx8w6q2o" path="res://scenes/hideable_object.tscn" id="7_bfp0i"]
+[ext_resource type="PackedScene" uid="uid://chfq3ibuytwpq" path="res://scenes/Monster.tscn" id="8_rfvmk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_why6n"]
 
@@ -60,3 +61,6 @@ texture = ExtResource("6_l3cb1")
 
 [node name="HideableObject" parent="." instance=ExtResource("7_bfp0i")]
 position = Vector2(-253, 5)
+
+[node name="RigidBody2D" parent="." instance=ExtResource("8_rfvmk")]
+position = Vector2(10, 0)
