@@ -60,7 +60,10 @@ scale = Vector2(0.174419, 0.158683)
 texture = ExtResource("6_l3cb1")
 
 [node name="HideableObject" parent="." instance=ExtResource("7_bfp0i")]
-position = Vector2(-253, 5)
+position = Vector2(-250, 5)
 
-[node name="RigidBody2D" parent="." instance=ExtResource("8_rfvmk")]
-position = Vector2(10, 0)
+[node name="HideableObject2" parent="." instance=ExtResource("7_bfp0i")]
+position = Vector2(350, 5)
+
+[node name="Monster" parent="." instance=ExtResource("8_rfvmk")]
+position = Vector2(-50, 9.7)

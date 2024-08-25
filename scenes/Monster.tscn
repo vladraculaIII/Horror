@@ -9,13 +9,12 @@ friction = 0.0
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_if57w"]
 
-[node name="RigidBody2D" type="RigidBody2D"]
-mass = 0.1
+[node name="RigidBody2D" type="RigidBody2D" groups=["monster"]]
 physics_material_override = SubResource("PhysicsMaterial_2sbgx")
 can_sleep = false
 lock_rotation = true
 linear_velocity = Vector2(5, 5)
-constant_force = Vector2(3, 3)
+constant_force = Vector2(0, 3)
 script = ExtResource("1_c87yh")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
@@ -25,3 +24,8 @@ shape = SubResource("RectangleShape2D_8lt7r")
 position = Vector2(-1.43051e-06, 0)
 scale = Vector2(20, 20)
 texture = SubResource("PlaceholderTexture2D_if57w")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

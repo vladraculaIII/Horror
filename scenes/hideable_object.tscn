@@ -6,7 +6,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_pokoj"]
 radius = 20.0
 
-[node name="HideableObject" type="Node2D"]
+[node name="HideableObject" type="Node2D" groups=["hideable_object"]]
 script = ExtResource("1_23xan")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

@@ -14,10 +14,10 @@ const MAX_STAMINA = 100.0
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-var can_hide = false
+@export var can_hide = false
 var is_hiding = false
 
-var jumpable = false
+var jumpable = true
 var staminaRegen = false
 var sprinting = false
 var stamina = 100.0
@@ -74,7 +74,7 @@ func _process(delta):
 	if stamina <= 0:
 		staminaRegen = true
 		StaminaRegainTimer.start()
-	print(stamina)
+	#print(stamina)
 
 	#Handle turning around.
 	if get_global_mouse_position().x > global_position.x:
