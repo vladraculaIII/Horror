@@ -1,66 +1,49 @@
 extends RigidBody2D
 
 @export var speed = 200
-@export var maxSpeed = 500
 @onready var player = $"../Player"
 @onready var hidingTimer = $Timer
+@onready var targetsToCamp = get_tree().get_nodes_in_group("hideable_object")
 
 
 var states = ['Bushcamp', 'Follow', 'Search']
-var currentState = 0
+var currentState = 2
+
 var looksForSpot = true
+var searchSpotArrayIndex = 0
 
 func _process(delta):
 	if (currentState == 0):
 		Bushcamp(delta)
-	if (currentState == 1):
+	elif (currentState == 1):
 		Follow(delta)
-	if (currentState == 2):
+	elif (currentState == 2):
 		Search(delta)
 
 func Bushcamp(delta: float):
-
-	#This complicated mess finds the closest hideable object on the X axis
 	if looksForSpot:
-		var targetsToCamp = get_tree().get_nodes_in_group("hideable_object")
 		var distanceArray = []
 		var targetPosition
 		var targetToHideIn
 		
+		#finds the closest object on x-axis
 		for obj in targetsToCamp:
-			if distanceArray.size() > 0:
-				var previousTargetPos = targetPosition
-				targetPosition = obj.position - position
-				if abs(targetPosition.x) < abs(previousTargetPos.x):
-					targetToHideIn = targetPosition
-				else:
-					targetToHideIn = previousTargetPos
-			else:
-				targetPosition = obj.position - position
-			distanceArray.insert(distanceArray.size(), targetPosition)
-	
-		#And this copy of Oskar's code moves the monster towards it
-		#However, if the target has a different Y, it moves slower (depending on how big Y difference is)
-		#Because I blatanty stole it, his code has the same issue (or a feature)
-		var movementVector = targetToHideIn.normalized()
-		linear_velocity = Vector2(clamp(movementVector.x * speed, -maxSpeed, maxSpeed), linear_velocity.y)
-	else:
-		#Something was moving the monster while nothing was impacting its position
-		#So I set the x Force in the Constant Forces field from 3 to 0
-		#It fixed it but idk what I did
-		pass
+			distanceArray.append(abs(obj.position.x - position.x))
+			targetToHideIn = targetsToCamp[distanceArray.find(distanceArray.min())].position
+		moveTowardsPoint(targetToHideIn, 5) #I set the precision to 5 as it made the monster stop reliably in a hiding spot.
 	
 func Follow(delta: float):
-	var monsterPosition = position
-	var playerPosition =  player.position
-	var movementDirection = playerPosition - monsterPosition
-	var movementVector = movementDirection.normalized()
-	linear_velocity = Vector2(clamp(movementVector.x * speed, -maxSpeed, maxSpeed), linear_velocity.y)
+	moveTowardsPoint(player.position, 0)
 
 func Search(delta: float):
-	pass
-
-
+	var searchSpots = targetsToCamp #hopefully this is a hard copy
+	
+	#reshuffles the search array if no valid entries are left
+	if searchSpots.size() <= searchSpotArrayIndex:
+		searchSpotArrayIndex = 0
+		searchSpots.shuffle()
+	var searchspot = searchSpots[searchSpotArrayIndex].position
+	moveTowardsPoint(searchspot, 5)
 
 func setState(state : int):
 	currentState = clamp(state, 0, states.size())
@@ -75,3 +58,16 @@ func Hide():
 func _on_timer_timeout():
 	looksForSpot = false
 	print("ready")
+
+func moveTowardsPoint(point : Vector2, precision : float):
+	#This only works because the movement is supposed to be one dimensional.
+	var movementDistance = point - position
+	
+	if movementDistance.x > abs(precision):
+		linear_velocity = Vector2(speed, linear_velocity.y)
+	
+	elif movementDistance.x < -abs(precision):
+		linear_velocity = Vector2(-speed, linear_velocity.y)
+		
+	else:
+		linear_velocity = Vector2.ZERO
