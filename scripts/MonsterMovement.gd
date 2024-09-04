@@ -5,13 +5,18 @@ extends RigidBody2D
 @onready var hidingTimer = $Timer
 @onready var targetsToCamp = get_tree().get_nodes_in_group("hideable_object")
 
-
 var states = ['Bushcamp', 'Follow', 'Search']
-var currentState = 2
+var currentState = 0
 
 var looksForSpot = true
 var searchSpotArrayIndex = 0
+var searchSpots = []
 
+func _ready():
+	searchSpots = targetsToCamp
+	print(targetsToCamp)
+	searchSpots.shuffle()
+	
 func _process(delta):
 	if (currentState == 0):
 		Bushcamp(delta)
@@ -36,8 +41,6 @@ func Follow(delta: float):
 	moveTowardsPoint(player.position, 0)
 
 func Search(delta: float):
-	var searchSpots = targetsToCamp #hopefully this is a hard copy
-	
 	#reshuffles the search array if no valid entries are left
 	if searchSpots.size() <= searchSpotArrayIndex:
 		searchSpotArrayIndex = 0
