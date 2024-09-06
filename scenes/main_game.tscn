@@ -1,15 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://bqugm2p4bkh67"]
+[gd_scene load_steps=13 format=3 uid="uid://bqugm2p4bkh67"]
 
 [ext_resource type="PackedScene" uid="uid://ba5dtlal1r6q" path="res://scenes/player.tscn" id="1_shg2h"]
-[ext_resource type="PackedScene" path="res://scenes/player_cam.tscn" id="2_4dxdl"]
+[ext_resource type="PackedScene" uid="uid://8t4etv2pqlb1" path="res://scenes/player_cam.tscn" id="2_4dxdl"]
 [ext_resource type="Texture2D" uid="uid://co2ilpi73o2jm" path="res://icon.svg" id="3_q0kx6"]
+[ext_resource type="Texture2D" uid="uid://cwb6k1stjs4dq" path="res://textures/circular_light.webp" id="3_s8k5w"]
 [ext_resource type="Texture2D" uid="uid://gvoebvyvs757" path="res://textures/walltext_test.png" id="4_577yf"]
+[ext_resource type="Texture2D" uid="uid://b8fmpfh5il8vt" path="res://textures/directional_light.webp" id="4_efxl2"]
 [ext_resource type="Texture2D" uid="uid://bxxtiokuckkc1" path="res://textures/objtext_test1.png" id="5_f1hvt"]
+[ext_resource type="Script" path="res://scripts/flashlight.gd" id="5_kcug1"]
 [ext_resource type="Texture2D" uid="uid://dvduj2qmdgltf" path="res://textures/objtext_test2.png" id="6_l3cb1"]
 [ext_resource type="PackedScene" uid="uid://7xj0kx8w6q2o" path="res://scenes/hideable_object.tscn" id="7_bfp0i"]
 [ext_resource type="PackedScene" uid="uid://chfq3ibuytwpq" path="res://scenes/Monster.tscn" id="8_rfvmk"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_fbokr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_why6n"]
 
@@ -24,8 +25,15 @@ z_index = 1000
 [node name="CameraPivot" parent="Player" instance=ExtResource("2_4dxdl")]
 
 [node name="PointLight2D" type="PointLight2D" parent="Player"]
-texture = SubResource("PlaceholderTexture2D_fbokr")
-texture_scale = 30.0
+color = Color(0.760784, 0.321569, 0.882353, 1)
+texture = ExtResource("3_s8k5w")
+texture_scale = 0.4
+
+[node name="PointLight2D2" type="PointLight2D" parent="Player"]
+scale = Vector2(10, 2)
+texture = ExtResource("4_efxl2")
+texture_scale = 0.3
+script = ExtResource("5_kcug1")
 
 [node name="LevelPlaceholder" type="Node2D" parent="."]
 
@@ -76,4 +84,3 @@ position = Vector2(350, 5)
 
 [node name="Monster" parent="." instance=ExtResource("8_rfvmk")]
 position = Vector2(-50, 9.7)
-speed = 125

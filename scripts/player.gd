@@ -78,7 +78,7 @@ func _process(delta):
 
 	#Handle turning around.
 	if get_global_mouse_position().x > global_position.x:
-		PlayerSprite.scale.x = 0.178
+		PlayerSprite.scale.x = 0.178 #might want to use a variable to store that number
 	elif get_global_mouse_position().x < global_position.x:
 		PlayerSprite.scale.x = -0.178
 
