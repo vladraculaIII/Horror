@@ -1,7 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://bqugm2p4bkh67"]
+[gd_scene load_steps=13 format=3 uid="uid://bqugm2p4bkh67"]
 
 [ext_resource type="PackedScene" uid="uid://ba5dtlal1r6q" path="res://scenes/player.tscn" id="1_shg2h"]
-[ext_resource type="PackedScene" path="res://scenes/player_cam.tscn" id="2_4dxdl"]
+[ext_resource type="PackedScene" uid="uid://8t4etv2pqlb1" path="res://scenes/player_cam.tscn" id="2_4dxdl"]
 [ext_resource type="Texture2D" uid="uid://co2ilpi73o2jm" path="res://icon.svg" id="3_q0kx6"]
 [ext_resource type="Texture2D" uid="uid://gvoebvyvs757" path="res://textures/walltext_test.png" id="4_577yf"]
 [ext_resource type="Texture2D" uid="uid://bxxtiokuckkc1" path="res://textures/objtext_test1.png" id="5_f1hvt"]
@@ -12,6 +12,13 @@
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_fbokr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_why6n"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_6imti"]
+a = Vector2(196, -70)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_ol633"]
+a = Vector2(164, -54)
+b = Vector2(-21, -53)
 
 [node name="MainGame" type="Node2D"]
 
@@ -31,8 +38,8 @@ texture_scale = 30.0
 
 [node name="wall_paceholder" type="Sprite2D" parent="LevelPlaceholder"]
 z_index = -1
-position = Vector2(-1.54972e-05, -85)
-scale = Vector2(0.661591, 0.511848)
+position = Vector2(2, -166)
+scale = Vector2(0.661591, 1.27014)
 texture = ExtResource("4_577yf")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="LevelPlaceholder"]
@@ -68,6 +75,32 @@ position = Vector2(-100, 7)
 scale = Vector2(0.174419, 0.158683)
 texture = ExtResource("6_l3cb1")
 
+[node name="StaticBody2D2" type="StaticBody2D" parent="LevelPlaceholder"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelPlaceholder/StaticBody2D2"]
+position = Vector2(87, 10)
+shape = SubResource("SegmentShape2D_6imti")
+one_way_collision = true
+
+[node name="Sprite2D" type="Sprite2D" parent="LevelPlaceholder/StaticBody2D2"]
+position = Vector2(181.03, -18.5253)
+rotation = -0.387755
+scale = Vector2(1.70483, 0.0262796)
+texture = ExtResource("3_q0kx6")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="LevelPlaceholder"]
+position = Vector2(-3, 13)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelPlaceholder/StaticBody2D3"]
+position = Vector2(3, -13)
+shape = SubResource("SegmentShape2D_ol633")
+debug_color = Color(0.991432, 0, 0.265635, 0.42)
+
+[node name="Sprite2D" type="Sprite2D" parent="LevelPlaceholder/StaticBody2D3"]
+position = Vector2(76, -66.5)
+scale = Vector2(1.4375, 0.0234375)
+texture = ExtResource("3_q0kx6")
+
 [node name="HideableObject" parent="." instance=ExtResource("7_bfp0i")]
 position = Vector2(-250, 5)
 
@@ -76,4 +109,3 @@ position = Vector2(350, 5)
 
 [node name="Monster" parent="." instance=ExtResource("8_rfvmk")]
 position = Vector2(-50, 9.7)
-speed = 125
